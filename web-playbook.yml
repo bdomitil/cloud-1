@@ -1,0 +1,6 @@
+- hosts : all
+  roles :
+    - {role : docker}
+    - {role: wordpress}
+    - {role : nginx}
+    - {role : mysql}

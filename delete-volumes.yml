@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+  - name: Delete volume data
+    block:
+      - name : Delete wp volume data 
+        file:
+          path: '{{wp_data_path}}'
+          state: absent
+
+      - name : Delete mysql data
+        file:
+          path: '{{mysql_data_path}}'
+          state: absent
+    become: true

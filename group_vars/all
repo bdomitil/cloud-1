@@ -1,0 +1,7 @@
+docker_network_name : inter
+db_host : mysql
+db_user : wordpress
+db_pass : P@$$w0rd
+db_name : wordpress_data
+wp_data_path: /opt/wordpress/
+mysql_data_path: /opt/mysql/

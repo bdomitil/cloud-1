@@ -1,0 +1,3 @@
+image_name : wp_image
+container_name : wordpress
+work_dir : '{{wp_data_path}}'

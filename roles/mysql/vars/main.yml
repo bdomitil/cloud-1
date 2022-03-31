@@ -1,0 +1,4 @@
+work_dir: '{{mysql_data_path}}'
+image_name: mysql
+volume_name: db_vol
+volume_path: '{{work_dir}}/db_volume'

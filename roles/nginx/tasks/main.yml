@@ -1,0 +1,38 @@
+- name : Create /opt/nginx work dir
+  become: true
+  file: 
+    path: "{{work_dir}} "
+    state: directory
+    mode: '0644'
+
+- name : Copy file to deploy Dockerfile
+  become: true
+  copy:
+    src: ../template/
+    dest: "{{work_dir}}"
+
+- name : Delete old images if exists
+  become: true
+  docker_image:
+    name: '{{image_name}}'
+    state: absent
+    force_absent: yes
+
+- name : Delete old containers
+  become: true
+  docker_container:
+    name: '{{container_name}}'
+    state: absent
+    force_kill: yes
+  
+
+- name : Build nginx container
+  become: true
+  docker_image:
+    name: '{{image_name}}'
+    state: present
+    source: build
+    build:
+      path: '{{work_dir}}'
+  notify:
+      - run container

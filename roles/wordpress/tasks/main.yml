@@ -1,0 +1,39 @@
+- name : Create volume folder for wp
+  become: true
+  file:
+    path: '{{work_dir}}'
+    state: directory
+
+
+- name : Delete old images if exists
+  become: true
+  docker_image:
+    name: '{{image_name}}'
+    state: absent
+    force_absent: yes
+
+- name : Delete old containers
+  become: true
+  docker_container:
+    name: '{{container_name}}'
+    state: absent
+    force_kill: yes
+
+
+- name : Deploy wp
+  become: true
+  docker_container:
+    name: wordpress
+    image: wordpress:latest
+    networks:
+      - name: '{{docker_network_name}}'
+    env:
+      WORDPRESS_DB_HOST: '{{db_host}}'
+      WORDPRESS_DB_NAME: '{{db_name}}'
+      WORDPRESS_DB_USER: '{{db_user}}'
+      WORDPRESS_DB_PASSWORD: '{{db_pass}}'
+    published_ports:
+      - 80:80
+    volumes:
+    - '{{work_dir}}/:/var/www/html/'
+    restart_policy: always
