@@ -42,4 +42,4 @@
 - name : Install docker network
   become : true
   docker_network:
-    name: '{{ docker_net_name }}'
+    name: '{{docker_network_name}}'
