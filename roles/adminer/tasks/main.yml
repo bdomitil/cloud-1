@@ -1,0 +1,8 @@
+- name: Run docker adminer
+  become: true
+  docker_container:
+    name: adminer
+    networks:
+     - name: '{{docker_network_name}}'
+    image: adminer
+    restart_policy: always

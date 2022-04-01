@@ -10,10 +10,8 @@
     published_ports:
       - 443:443
     detach: yes
-    auto_remove: yes
-    pull: no
+    restart_policy: always
 
 
-- name: test
-  command: echo "123"
+
     
