@@ -1,7 +1,7 @@
 - name : Create /opt/nginx work dir
   become: true
-  file: 
-    path: "{{work_dir}} "
+  file:
+    path: "{{work_dir}}"
     state: directory
     mode: '0644'
 

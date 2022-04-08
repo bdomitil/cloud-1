@@ -9,6 +9,7 @@
       - name: '{{docker_network_name}}'
     published_ports:
       - 443:443
+      - 80:80
     detach: yes
     restart_policy: always
 

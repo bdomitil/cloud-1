@@ -1,8 +1,17 @@
 - name : Create volume folder for mysql
   become: true
   file:
-    path: '{{work_dir}}'
+    path: '{{volume_path}}'
     state: directory
+
+
+- name : Delete old containers
+  become: true
+  docker_container:
+    name: '{{container_name}}'
+    state: absent
+    force_kill: yes
+
 
 - name : Delete old images if exists
   become: true
@@ -11,12 +20,6 @@
     state: absent
     force_absent: yes
 
-- name : Delete old containers
-  become: true
-  docker_container:
-    name: '{{container_name}}'
-    state: absent
-    force_kill: yes
 
 
 - name: Run mysql container
@@ -31,8 +34,6 @@
       MYSQL_DATABASE: '{{db_name}}'
       MYSQL_PASSWORD: '{{db_pass}}'
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-    
-    
     volumes:
       - '{{volume_path}}/:/var/lib/mysql/'
     restart_policy: always

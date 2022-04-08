@@ -1,6 +1,6 @@
-- hosts : all
+- hosts : cloud-1
   roles :
-    # - {role : docker}
+    - {role : docker}
     - {role: wordpress}
     - {role : mysql}
     - {role: adminer}
